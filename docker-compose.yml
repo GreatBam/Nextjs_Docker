@@ -23,7 +23,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - ./db/production:/docker-entrypoint-initdb.d
-      - node_backup:/var/lib/mysql
+      - nextjs_backup:/var/lib/mysql
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost --silent"]
       interval: 15s
@@ -43,4 +43,4 @@ services:
     restart: always
 
 volumes:
-  node_backup:
+  nextjs_backup:
