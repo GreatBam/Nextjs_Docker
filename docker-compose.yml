@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  nextjs:
+    build: ./nextjs
+    env_file:
+      - ./node/.env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  db:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - ./db/production:/docker-entrypoint-initdb.d
+      - node_backup:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost --silent"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+    restart: always
+
+  pma:
+    image: phpmyadmin:5
+    ports:
+      - 8088:80
+    environment:
+      PMA_PORT: ${MYSQL_PORT}
+      PMA_HOST: ${PMA_HOST}
+      PMA_USER: ${PMA_USER}
+      PMA_PASSWORD: ${PMA_PASSWORD}
+    restart: always
+
+volumes:
+  node_backup:
