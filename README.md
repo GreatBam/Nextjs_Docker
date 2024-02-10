@@ -28,6 +28,8 @@ PMA_PASSWORD=$MYSQL_ROOT_PASSWORD
 
 Don't forget to change the "init.sql" file to add your own data on the db when container will be deployed.
 
+## Usage
+
 You can now execute this command to deploy your container :
 
 ```bash
