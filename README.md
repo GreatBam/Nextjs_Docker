@@ -30,7 +30,7 @@ Don't forget to change the "init.sql" file to add your own data on the db when c
 
 ## Usage
 
-You can now execute this command to deploy your container :
+You can now execute this command to deploy :
 
 ```bash
 docker-compose up -d
