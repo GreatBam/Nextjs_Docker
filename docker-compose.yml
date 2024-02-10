@@ -34,7 +34,7 @@ services:
   pma:
     image: phpmyadmin:5
     ports:
-      - 8088:80
+      - 8081:80
     environment:
       PMA_PORT: ${MYSQL_PORT}
       PMA_HOST: ${PMA_HOST}
