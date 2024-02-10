@@ -3,10 +3,8 @@ version: "3"
 services:
   nextjs:
     build: ./nextjs
-    env_file:
-      - ./node/.env
     environment:
-      - NODE_ENV=production
+      - NEXT_ENV=production
     ports:
       - "3000:3000"
     depends_on:
